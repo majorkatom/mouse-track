@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, send_file
 from flask_sqlalchemy import SQLAlchemy
-import psycopg2
 from datetime import datetime
 from io import StringIO, BytesIO
 import csv
