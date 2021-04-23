@@ -1,0 +1,81 @@
+div#tile_container {
+    position: relative;
+    width: 75vh;
+    height: 75vh;
+}
+
+.tile {
+    width: 32%;
+    height: 32%;
+    font-size: 7vh;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 2px black;
+}
+
+#tile_1 {
+    position: absolute;
+    top: 34%;
+    left: 34%;
+    background-color: #dfecec;
+}
+
+#tile_2 {
+    position: absolute;
+    top: 34%;
+    left: 0%;
+    background-color: #bfd9d9;
+}
+
+#tile_3 {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    background-color: #9fc6c6;
+}
+
+#tile_4 {
+    position: absolute;
+    top: 0%;
+    left: 34%;
+    background-color: #80b3b3;
+}
+
+#tile_5 {
+    position: absolute;
+    top: 34%;
+    right: 0%;
+    background-color: #609f9f;
+}
+
+#tile_6 {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: #4d8080;
+}
+
+#tile_7 {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    background-color: #396060;
+}
+
+#tile_8 {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    background-color: #264040;
+}
+
+#tile_9 {
+    position: absolute;
+    bottom: 0%;
+    left: 34%;
+    background-color: #132020;
+}
+
+.tile_border {
+    outline: 0.7vh solid black;
+}

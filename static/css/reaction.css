@@ -1,0 +1,93 @@
+body {
+    margin: 1vh;
+}
+
+div#upper {
+    position: relative;
+    height: 18vh;
+}
+
+.head {
+    position: absolute;
+    margin: 0px;
+}
+
+#instruction {
+    top: 0%;
+    left: 0%;
+}
+
+#start {
+    top: 32%;
+    left: 0%;
+}
+
+#label {
+    bottom: 20%;
+    left: 0%;
+}
+
+#count {
+    bottom: 2%;
+    left : 0%;
+}
+
+div#lower {
+    position: relative;
+    height: 80vh;
+}
+
+.buttons {
+    position: absolute;
+    display: none;
+}
+
+button#button1 {
+    top: 15%;
+    left: 41%;
+}
+
+button#button2 {
+    top: 92%;
+    left: 89%;
+}
+
+button#button3 {
+    top: 73%;
+    left: 76%;
+}
+
+button#button4 {
+    top: 70%;
+    left: 22%;
+}
+
+button#button5 {
+    top: 25%;
+    left: 56%;
+}
+
+button#button6 {
+    top: 85%;
+    left: 55%;
+}
+
+button#button7 {
+    top: 2%;
+    left: 16%;
+}
+
+button#button8 {
+    top: 33%;
+    left: 28%;
+}
+
+button#button9 {
+    top: 64%;
+    left: 8%;
+}
+
+button#button10 {
+    top: 52%;
+    left: 91%;
+}

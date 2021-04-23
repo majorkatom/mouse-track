@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi vagy?</title>
+</head>
+<body>
+    <h1>Mouse Tracker</h1>
+    <h3>Mi vagy?</h3>
+    <form action="/" method="POST">
+        <div style="margin-bottom: 10px;">
+            <input type="radio" id="human" value="human" name="visitor">
+            <label for="human">Ember</label><br>
+            <input type="radio" id="bot" value="bot" name="visitor">
+            <label for="bot">Bot</label><br>
+            <div id="botId" style="display: none;">
+                <label for="botType" style="margin-left: 35px;">típus:</label><br>
+                <input type="text" id="botType" name="type" style="margin-left: 35px; margin-top: 5px;">
+            </div>
+        </div>        
+        <input type="submit" value="Mehet">
+    </form>
+    <p style="margin-bottom: 0.5em;">Megjegyzések:</p>
+        <ul style="margin-top: 0.5em;">
+            <li>Mindössze két rövid feladatot kell teljesíteni.</li>
+            <li>A feladatokat számítógépen vagy laptopon (ne mobil eszközön) végezd el!</li>
+            <li>Csak egyszer végezd el a feladatokat!</li>
+            <li>Ne oldasd meg botokkal a feladatokat! Azokról majd én gondoskodom.</li>
+        </ul>
+    <script>
+        radioButtons = document.getElementsByName("visitor");
+        textInput = document.getElementById("botId");
+        for(var i = 0; i < radioButtons.length; i++){
+            radioButtons[i].addEventListener("click", function () {
+                if(this.id==="bot"){
+                    textInput.style="display: inline;";
+                }
+                else{
+                    textInput.style="display: none;";
+                }
+            })
+        }
+    </script>
+</body>
+</html>
