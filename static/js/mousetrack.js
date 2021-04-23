@@ -39,14 +39,15 @@ function stopTracking(){
     mouse_data.viewport.height = document.documentElement.clientHeight;
     mouse_data.tileDimensions.width = this.getBoundingClientRect().width;
     mouse_data.tileDimensions.height = this.getBoundingClientRect().height;
-
-    var http = new XMLHttpRequest();
-    http.open("POST", "/track", true);
-    http.setRequestHeader("Content-Type", "application/json");
-    http.send(JSON.stringify(mouse_data));
-    http.onreadystatechange = function(){
-        if(this.readyState===4){window.location.href = this.response;}
-    };
+    setTimeout(() => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "/track", true);
+        http.setRequestHeader("Content-Type", "application/json");
+        http.send(JSON.stringify(mouse_data));
+        http.onreadystatechange = function(){
+            if(this.readyState===4){window.location.href = this.response;}
+        };
+    }, 50);
 }
 
 function handleMove(event){
