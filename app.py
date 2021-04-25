@@ -49,13 +49,16 @@ def index():
             if 'type' in request.form:
                 session['bottype'] = request.form['type']
 
-            return redirect('/track')
+            return redirect('/tiles')
     else:
-        return render_template('index.html')
+        if 'finished' in session:
+            return redirect('/completed')
+        else:
+            return render_template('index.html')
 
 
-@app.route('/track', methods=['POST', 'GET'])
-def track():
+@app.route('/tiles', methods=['POST', 'GET'])
+def tiles():
     if request.method == 'POST':
         mouse_data = request.json
 
@@ -74,12 +77,12 @@ def track():
             db.session.add(new_data)
             db.session.commit()
 
-            return '/track/success'
+            return '/tiles/success'
         else:
-            return '/track/fail'
+            return '/tiles/fail'
 
     elif 'visitor' in session:
-        return render_template('track.html')
+        return render_template('tiles.html')
     else:
         return redirect('/unidentified')
 
@@ -104,12 +107,12 @@ def reaction():
         return redirect('/unidentified')
 
 
-@app.route('/track/fail')
+@app.route('/tiles/fail')
 def fail():
     return render_template('fail.html')
 
 
-@app.route('/track/success')
+@app.route('/tiles/success')
 def success():
     return render_template('success.html')
 
@@ -121,7 +124,24 @@ def unidentified():
 
 @app.route('/finished')
 def finished():
+    session.clear()
+    session.permanent = True
+    session['finished'] = True
     return render_template('finished.html')
+
+
+@app.route('/completed', methods=['POST', 'GET'])
+def completed():
+    if request.method == 'POST':
+        session.clear()
+        return redirect('/')
+    else:
+        return render_template('completed.html')
+
+
+@app.route('/mobile')
+def mobile():
+    return render_template('mobile.html')
 
 
 @app.route('/download1')
