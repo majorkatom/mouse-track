@@ -48,15 +48,7 @@ def index():
             return redirect('/')
         else:
             return redirect('/tiles')
-        # try:
-        #     session['visitor'] = request.form['visitor']
-        #     session['type'] = request.form['type']
-        # except KeyError:
-        #     return redirect('/')
-        # else:
-        #     if 'type' in request.form:
-        #         session['type'] = request.form['type']
-        #     return redirect('/tiles')
+            
     else:
         if 'finished' in session:
             return redirect('/completed')
@@ -76,11 +68,7 @@ def tiles():
                 click_order = False
         
         if click_num and click_order:
-            visitor = session['visitor']
-            # if visitor == 'human':
-            #     new_data = Tiles(visitor=visitor, mouse_data=mouse_data)
-            # else:
-            new_data = Tiles(visitor=visitor, typ=session['type'], mouse_data=mouse_data)
+            new_data = Tiles(visitor=session['visitor'], typ=session['type'], mouse_data=mouse_data)
             db.session.add(new_data)
             db.session.commit()
 
@@ -99,11 +87,7 @@ def reaction():
     if request.method == 'POST':
         reaction_data = request.json
 
-        visitor = session['visitor']
-        # if visitor == 'human':
-        #     new_data = Reaction(visitor=visitor, reaction_data=reaction_data)
-        # else:
-        new_data = Reaction(visitor=visitor, typ=session['type'], reaction_data=reaction_data)
+        new_data = Reaction(visitor=session['visitor'], typ=session['type'], reaction_data=reaction_data)
         db.session.add(new_data)
         db.session.commit()
 
