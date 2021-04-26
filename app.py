@@ -20,36 +20,43 @@ db = SQLAlchemy(app)
 class Tiles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     visitor = db.Column(db.String(5), nullable=False)
-    bot_type = db.Column(db.String(20), default='')
+    typ = db.Column(db.String(20), default='')
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     mouse_data = db.Column(db.JSON, nullable=False)
 
     def __repr__(self):
-        return f" Tiles(visitor='{self.visitor}', bot_type='{self.bot_type}', date='{self.date}')>"
+        return f" Tiles(visitor='{self.visitor}', type='{self.typ}', date='{self.date}')>"
 
 class Reaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     visitor = db.Column(db.String(5), nullable=False)
-    bot_type = db.Column(db.String(20), default='')
+    typ = db.Column(db.String(20), default='')
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     reaction_data = db.Column(db.JSON, nullable=False)
 
     def __repr__(self):
-        return f"<Reaction(visitor='{self.visitor}', bot_type='{self.bot_type}', date='{self.date}')>"
+        return f"<Reaction(visitor='{self.visitor}', type='{self.typ}', date='{self.date}')>"
 
 # ROUTES
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        try:
-            session['visitor'] = request.form['visitor']
-        except KeyError:
+        session['visitor'] = request.form['visitor']
+        session['type'] = request.form['type']
+        if session['type'] == '':
+            session.clear()
             return redirect('/')
         else:
-            if 'type' in request.form:
-                session['bottype'] = request.form['type']
-
             return redirect('/tiles')
+        # try:
+        #     session['visitor'] = request.form['visitor']
+        #     session['type'] = request.form['type']
+        # except KeyError:
+        #     return redirect('/')
+        # else:
+        #     if 'type' in request.form:
+        #         session['type'] = request.form['type']
+        #     return redirect('/tiles')
     else:
         if 'finished' in session:
             return redirect('/completed')
@@ -70,10 +77,10 @@ def tiles():
         
         if click_num and click_order:
             visitor = session['visitor']
-            if visitor == 'human':
-                new_data = Tiles(visitor=visitor, mouse_data=mouse_data)
-            else:
-                new_data = Tiles(visitor=visitor, bot_type=session['bottype'], mouse_data=mouse_data)
+            # if visitor == 'human':
+            #     new_data = Tiles(visitor=visitor, mouse_data=mouse_data)
+            # else:
+            new_data = Tiles(visitor=visitor, typ=session['type'], mouse_data=mouse_data)
             db.session.add(new_data)
             db.session.commit()
 
@@ -93,10 +100,10 @@ def reaction():
         reaction_data = request.json
 
         visitor = session['visitor']
-        if visitor == 'human':
-            new_data = Reaction(visitor=visitor, reaction_data=reaction_data)
-        else:
-            new_data = Reaction(visitor=visitor, bot_type=session['bottype'], reaction_data=reaction_data)
+        # if visitor == 'human':
+        #     new_data = Reaction(visitor=visitor, reaction_data=reaction_data)
+        # else:
+        new_data = Reaction(visitor=visitor, typ=session['type'], reaction_data=reaction_data)
         db.session.add(new_data)
         db.session.commit()
 

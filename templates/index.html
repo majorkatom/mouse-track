@@ -8,11 +8,19 @@
 </head>
 <body>
     <h1>Mouse Tracker</h1>
-    <h3>Mi vagy?</h3>
+    <h3>Mi vagy és mit használsz?</h3>
     <form action="/" method="POST">
-        <div style="margin-bottom: 10px;">
-            <input type="radio" id="human" value="human" name="visitor">
+        <div style="margin-bottom: 10px;" >
+            <input type="radio" id="human" value="human" name="visitor" checked>
             <label for="human">Ember</label><br>
+            <div id="inputdevicesdiv" style="padding-left: 1em;margin-bottom: 0.5em;">
+                <input type="radio" id="mouse" value="mouse" name="type" class="inputdevice">
+                <label for="mouse">Egér</label><br>
+                <input type="radio" id="touchpad" value="touchpad" name="type" class="inputdevice">
+                <label for="touchpad">Érintőpárna (touchpad/trackpad)</label><br>
+                <input type="radio" id="trackball" value="trackball" name="type" class="inputdevice">
+                <label for="trackball">Trackball</label>
+            </div>
             <input type="radio" id="bot" value="bot" name="visitor">
             <label for="bot">Bot</label><br>
             <div id="botId" style="display: none;">
@@ -25,7 +33,7 @@
     <p style="margin-bottom: 0.5em; font-size: 1.1em;"><b>Megjegyzések:</b></p>
         <ul style="margin-top: 0.5em;">
             <li>Mindössze két rövid feladatot kell teljesíteni.</li>
-            <li>A feladatokat számítógépen vagy laptopon (ne mobil eszközön) végezd el!</li>
+            <li>A feladatokat számítógépen vagy laptopon (ne mobil eszközön) végezd el, és ne használj érintőképernyőt!</li>
             <li>Csak egyszer végezd el a feladatokat!</li>
             <li>Ne oldasd meg botokkal a feladatokat! Azokról majd én gondoskodom.</li>
             <li>Internet Explorerben nem működik az oldal.</li>
@@ -33,15 +41,22 @@
             <li>Ha valami hibát tapasztalsz, kérlek jelezd nekem (ha egyéb kontaktod nincs velem, akkor a <a href="mailto:majorkatom@gmail.com">majorkatom@gmail.com</a> email címen).</li>
         </ul>
     <script>
-        radioButtons = document.getElementsByName("visitor");
-        textInput = document.getElementById("botId");
+        var radioButtons = document.getElementsByName("visitor");
+        var textInput = document.getElementById("botId");
+        var inputDevices = document.getElementsByClassName("inputdevice");
+        var inputDevicesDiv = document.getElementById("inputdevicesdiv");
         for(var i = 0; i < radioButtons.length; i++){
             radioButtons[i].addEventListener("click", function () {
                 if(this.id==="bot"){
                     textInput.style="display: inline;";
+                    for(var j = 0; j < inputDevices.length; j++){
+                        inputDevices[j].checked = false;
+                    }
+                    inputDevicesDiv.style = "display: none;";
                 }
                 else{
                     textInput.style="display: none;";
+                    inputDevicesDiv.style = "display: block;padding-left: 1em;margin-bottom: 0.5em;";
                 }
             })
         }
