@@ -137,7 +137,7 @@ def mobile():
 
 @app.route('/download1')
 def download1():
-    records = Tiles.query.all()
+    records = Tiles.query.order_by(Tiles.id).all()
     mouse_list = [[getattr(curr, column.name) for column in Tiles.__mapper__.columns] for curr in records]
     mouse_csv = StringIO()
     writer = csv.writer(mouse_csv, delimiter=';')
@@ -154,7 +154,7 @@ def download1():
 
 @app.route('/download2')
 def download2():
-    records = Reaction.query.all()
+    records = Reaction.query.order_by(Reaction.id).all()
     reaction_list = [[getattr(curr, column.name) for column in Reaction.__mapper__.columns] for curr in records]
     reaction_csv = StringIO()
     writer = csv.writer(reaction_csv, delimiter=';')
